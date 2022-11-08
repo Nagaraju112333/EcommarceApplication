@@ -27,5 +27,9 @@ namespace ArchentsFirstProject.Controllers
 
             return View();
         }
+        public ActionResult Hai()
+        {
+            return View();
+        }
     }
 }
