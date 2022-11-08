@@ -83,7 +83,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
                         <div class="form-group-lg">
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control w-50" } })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control w-50",type="password" } })
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>

@@ -86,7 +86,7 @@ namespace ArchentsFirstProject.Controllers
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode, string emailfor = "VerifyAccount")
         {
-            var verifyUrl = "/User/" + emailfor + "/" + activationCode;
+            var verifyUrl = "/Account/" + emailfor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
             var fromEmail = new MailAddress("nagaraju.bodaarchents.com@outlook.com", emailID);
             var toEmail = new MailAddress(emailID);
