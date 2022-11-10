@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ArchentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
         <EntityType Name="Register">
           <Key>
             <PropertyRef Name="RegisterId" />
@@ -17,9 +29,27 @@
           <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
           <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ResetpasswordCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone_Number" Type="varchar" MaxLength="20" />
         </EntityType>
+        <Association Name="FK__Products__userid__267ABA7A">
+          <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Register">
+              <PropertyRef Name="RegisterId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ArchentsModelStoreContainer">
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Products__userid__267ABA7A" Association="Self.FK__Products__userid__267ABA7A">
+            <End Role="Register" EntitySet="Register" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -37,10 +67,42 @@
           <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
           <Property Name="ActivationCode" Type="Guid" Nullable="false" />
           <Property Name="ResetpasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Products" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Register" ToRole="Product" />
         </EntityType>
         <EntityContainer Name="ArchentsEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Registers" EntityType="Self.Register" />
+          <EntitySet Name="Products" EntityType="ArchentsModel.Product" />
+          <AssociationSet Name="FK__Products__userid__267ABA7A" Association="ArchentsModel.FK__Products__userid__267ABA7A">
+            <End Role="Register" EntitySet="Registers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="userid" Type="Int32" />
+          <NavigationProperty Name="Register" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Product" ToRole="Register" />
+        </EntityType>
+        <Association Name="FK__Products__userid__267ABA7A">
+          <End Type="ArchentsModel.Register" Role="Register" Multiplicity="0..1" />
+          <End Type="ArchentsModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Register">
+              <PropertyRef Name="RegisterId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +112,7 @@
           <EntitySetMapping Name="Registers">
             <EntityTypeMapping TypeName="ArchentsModel.Register">
               <MappingFragment StoreEntitySet="Register">
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
                 <ScalarProperty Name="ResetpasswordCode" ColumnName="ResetpasswordCode" />
                 <ScalarProperty Name="RegisterId" ColumnName="RegisterId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -58,6 +121,19 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
                 <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ArchentsModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

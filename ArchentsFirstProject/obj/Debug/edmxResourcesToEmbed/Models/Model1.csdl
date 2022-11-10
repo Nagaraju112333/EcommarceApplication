@@ -12,8 +12,40 @@
     <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
     <Property Name="ActivationCode" Type="Guid" Nullable="false" />
     <Property Name="ResetpasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Register" ToRole="Product" />
   </EntityType>
   <EntityContainer Name="ArchentsEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Registers" EntityType="Self.Register" />
+    <EntitySet Name="Products" EntityType="ArchentsModel.Product" />
+    <AssociationSet Name="FK__Products__userid__267ABA7A" Association="ArchentsModel.FK__Products__userid__267ABA7A">
+      <End Role="Register" EntitySet="Registers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="userid" Type="Int32" />
+    <NavigationProperty Name="Register" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Product" ToRole="Register" />
+  </EntityType>
+  <Association Name="FK__Products__userid__267ABA7A">
+    <End Type="ArchentsModel.Register" Role="Register" Multiplicity="0..1" />
+    <End Type="ArchentsModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Register">
+        <PropertyRef Name="RegisterId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

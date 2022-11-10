@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="db9854c408e54b179b35b0e65b113af4" Name="Diagram1">
         <EntityTypeShape EntityType="ArchentsModel.Register" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.Product" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="ArchentsModel.FK__Products__userid__267ABA7A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

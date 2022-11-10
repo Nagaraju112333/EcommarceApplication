@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Registers">
       <EntityTypeMapping TypeName="ArchentsModel.Register">
         <MappingFragment StoreEntitySet="Register">
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
           <ScalarProperty Name="ResetpasswordCode" ColumnName="ResetpasswordCode" />
           <ScalarProperty Name="RegisterId" ColumnName="RegisterId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -12,6 +13,19 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
           <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ArchentsModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

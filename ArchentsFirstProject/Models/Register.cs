@@ -14,6 +14,12 @@ namespace ArchentsFirstProject.Models
     
     public partial class Register
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Register()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
         public int RegisterId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,5 +28,9 @@ namespace ArchentsFirstProject.Models
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
         public string ResetpasswordCode { get; set; }
+        public string Phone_Number { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

@@ -26,5 +26,6 @@ namespace ArchentsFirstProject.Models
         }
     
         public virtual DbSet<Register> Registers { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ArchentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Size" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="userid" Type="int" />
+  </EntityType>
   <EntityType Name="Register">
     <Key>
       <PropertyRef Name="RegisterId" />
@@ -12,8 +24,26 @@
     <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
     <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ResetpasswordCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone_Number" Type="varchar" MaxLength="20" />
   </EntityType>
+  <Association Name="FK__Products__userid__267ABA7A">
+    <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Register">
+        <PropertyRef Name="RegisterId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ArchentsModelStoreContainer">
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Products__userid__267ABA7A" Association="Self.FK__Products__userid__267ABA7A">
+      <End Role="Register" EntitySet="Register" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

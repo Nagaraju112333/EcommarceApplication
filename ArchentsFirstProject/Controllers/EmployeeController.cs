@@ -13,5 +13,9 @@ namespace ArchentsFirstProject.Controllers
         {
             return View();
         }
+        public ActionResult GetEmployee()
+        {
+            return View();
+        }
     }
 }
