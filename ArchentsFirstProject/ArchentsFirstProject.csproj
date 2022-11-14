@@ -129,11 +129,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CardController.cs" />
-    <Compile Include="Controllers\CatogeryController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\WeekendBootController.cs" />
     <Compile Include="Crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -172,10 +171,18 @@
     <Content Include="Content\HomeImages\ecommarceImage.jpg" />
     <Content Include="Content\HomeImages\FixHomeImage.jpg" />
     <Content Include="Content\HomeImages\SecondImage.jpg" />
+    <Content Include="Content\WeekendBootimages\b25lY21zOmY3MjgyZGU0LWFmOTYtNDIwYy1hZGI1LWFkMjU1ZTAwZmM5Njo1MTAyMzhlOS1hZTdmLTRhOGEtODE0OC1kODkxMmYwMDRhZjA=.jpg" />
+    <Content Include="Content\WeekendBootimages\Screenshot %28122%29.png" />
+    <Content Include="Content\WeekendBootimages\Secondimage.jpg" />
+    <Content Include="Content\WeekendBootimages\Secondimage1.jpg" />
+    <Content Include="Content\WeekendBootimages\secondimage2.jpg" />
+    <Content Include="Content\WeekendBootimages\thirdimage1.jpg" />
+    <Content Include="Content\WeekendBootimages\thiredimage.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -195,6 +202,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\WeekendBootimages\BootImage.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -206,6 +214,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Product\Projectsize.js" />
     <Content Include="Views\Shared\Master.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -226,6 +235,8 @@
     <Content Include="Views\Account\UserRegister.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Products\WeeknedBoots.cshtml" />
+    <Content Include="Views\WeekendBoot\WeekendBootMainPage.cshtml" />
+    <Content Include="Views\WeekendBoot\Weekenboot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
