@@ -17,7 +17,7 @@ namespace ArchentsFirstProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Register()
         {
-            this.Products = new HashSet<Product>();
+            this.Order_tbl = new HashSet<Order_tbl>();
         }
     
         public int RegisterId { get; set; }
@@ -31,6 +31,6 @@ namespace ArchentsFirstProject.Models
         public string Phone_Number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Order_tbl> Order_tbl { get; set; }
     }
 }

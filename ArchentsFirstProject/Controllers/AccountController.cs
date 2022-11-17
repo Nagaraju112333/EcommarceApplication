@@ -15,7 +15,7 @@ namespace ArchentsFirstProject.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-            ArchentsEntities2 db=new ArchentsEntities2();   
+            ArchentsEntities4 db=new ArchentsEntities4();   
         public ActionResult Index()
         {
             return View();
@@ -53,7 +53,7 @@ namespace ArchentsFirstProject.Controllers
                 user.IsEmailVerified = false;
 
                 #region Save to Database
-                using (ArchentsEntities2 dc = new ArchentsEntities2())
+                using (ArchentsEntities4 dc = new ArchentsEntities4())
                 {
                     dc.Registers.Add(user);
                     dc.SaveChanges();
@@ -77,7 +77,7 @@ namespace ArchentsFirstProject.Controllers
         [NonAction]
         public bool IsEmailExist(string emailID)
         {
-            using (ArchentsEntities2 dc = new ArchentsEntities2())
+            using (ArchentsEntities4 dc = new ArchentsEntities4())
             {
                 var v = dc.Registers.Where(a => a.Email == emailID).FirstOrDefault();
                 return v != null;
@@ -174,7 +174,7 @@ namespace ArchentsFirstProject.Controllers
             string message = "";
             bool status = false;
 
-            using (ArchentsEntities2 dc = new ArchentsEntities2())
+            using (ArchentsEntities4 dc = new ArchentsEntities4())
             {
                 var account = dc.Registers.Where(a => a.Email == EmailID).FirstOrDefault();
                 if (account != null)
@@ -207,7 +207,7 @@ namespace ArchentsFirstProject.Controllers
                 return HttpNotFound();
             }
 
-            using (ArchentsEntities2 dc = new ArchentsEntities2())
+            using (ArchentsEntities4 dc = new ArchentsEntities4())
             {
                 var user = dc.Registers.Where(a => a.ResetpasswordCode == id).FirstOrDefault();
                 if (user != null)
@@ -229,7 +229,7 @@ namespace ArchentsFirstProject.Controllers
             var message = "";
             if (ModelState.IsValid)
             {
-                using (ArchentsEntities2 dc = new ArchentsEntities2())
+                using (ArchentsEntities4 dc = new ArchentsEntities4())
                 {
                     var user = dc.Registers.Where(a => a.ResetpasswordCode == model.ResetCode).FirstOrDefault();
                     if (user != null)
@@ -254,7 +254,7 @@ namespace ArchentsFirstProject.Controllers
         public ActionResult VerifyAccount(string id)
         {
             bool Status = false;
-            using (ArchentsEntities2 db = new ArchentsEntities2())
+            using (ArchentsEntities4 db = new ArchentsEntities4())
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
                 var a = db.Registers.FirstOrDefault(c => c.ActivationCode == new Guid(id));
@@ -282,7 +282,7 @@ namespace ArchentsFirstProject.Controllers
         public ActionResult Login( UserLogin login, string ReturnUrl = "")
         {
             string message = "";
-            using (ArchentsEntities2 dc = new ArchentsEntities2())
+            using (ArchentsEntities4 dc = new ArchentsEntities4())
             {
                 var v = dc.Registers.Where(a => a.Email == login.EmailID).FirstOrDefault();
                 if (v != null)

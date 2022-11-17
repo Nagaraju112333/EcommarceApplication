@@ -5,17 +5,77 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ArchentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_Id" />
+          </Key>
+          <Property Name="Category_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category_Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category_Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="Order_Details_id" />
+          </Key>
+          <Property Name="Order_Details_id" Type="int" Nullable="false" />
+          <Property Name="Product_id" Type="int" />
+          <Property Name="product_Qty" Type="int" />
+          <Property Name="product_price" Type="int" />
+          <Property Name="Order_Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTotal" Type="int" />
+        </EntityType>
+        <EntityType Name="Order_tbl">
+          <Key>
+            <PropertyRef Name="Order_id" />
+          </Key>
+          <Property Name="Order_id" Type="int" Nullable="false" />
+          <Property Name="Order_No" Type="int" Nullable="false" />
+          <Property Name="Order-Date" Type="datetime" />
+          <Property Name="Order-Total" Type="int" />
+          <Property Name="Register_id" Type="int" />
+          <Property Name="Shoping_date" Type="datetime" />
+          <Property Name="Is_delivered" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Product_Id" />
           </Key>
-          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Size" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="int" />
-          <Property Name="userid" Type="int" />
+          <Property Name="Product_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_Description" Type="nvarchar(max)" />
+          <Property Name="Image1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="Category_id" Type="int" />
+          <Property Name="Image5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image6" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image7" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image8" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Products1">
+          <Key>
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Product_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_Description" Type="nvarchar(max)" />
+          <Property Name="Image1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="pstatus" Type="int" />
+          <Property Name="Image5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image6" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image7" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image8" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Register">
           <Key>
@@ -31,23 +91,114 @@
           <Property Name="ResetpasswordCode" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone_Number" Type="varchar" MaxLength="20" />
         </EntityType>
-        <Association Name="FK__Products__userid__267ABA7A">
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Review_Tittle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Body" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Order_Details_Order_tbl">
+          <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order_tbl">
+              <PropertyRef Name="Order_id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="Order_Details_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Details_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_tbl_Register">
           <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Register">
               <PropertyRef Name="RegisterId" />
             </Principal>
+            <Dependent Role="Order_tbl">
+              <PropertyRef Name="Register_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
             <Dependent Role="Products">
-              <PropertyRef Name="userid" />
+              <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ArchentsModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_tbl" EntityType="Self.Order_tbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Products__userid__267ABA7A" Association="Self.FK__Products__userid__267ABA7A">
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products1" EntityType="Self.Products1" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Products1].[Product_Id] AS [Product_Id], 
+    [Products1].[Product_Name] AS [Product_Name], 
+    [Products1].[product_Description] AS [product_Description], 
+    [Products1].[Image1] AS [Image1], 
+    [Products1].[Image2] AS [Image2], 
+    [Products1].[Image3] AS [Image3], 
+    [Products1].[Image4] AS [Image4], 
+    [Products1].[Price] AS [Price], 
+    [Products1].[Stock] AS [Stock], 
+    [Products1].[pstatus] AS [pstatus], 
+    [Products1].[Image5] AS [Image5], 
+    [Products1].[Image6] AS [Image6], 
+    [Products1].[Image7] AS [Image7], 
+    [Products1].[Image8] AS [Image8]
+    FROM [dbo].[Products1] AS [Products1]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Order_Details_Order_tbl" Association="Self.FK_Order_Details_Order_tbl">
+            <End Role="Order_tbl" EntitySet="Order_tbl" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Products" Association="Self.FK_Order_Details_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_tbl_Register" Association="Self.FK_Order_tbl_Register">
             <End Role="Register" EntitySet="Register" />
+            <End Role="Order_tbl" EntitySet="Order_tbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+            <End Role="Category" EntitySet="Category" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
@@ -55,6 +206,64 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ArchentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_Id" />
+          </Key>
+          <Property Name="Category_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Products_Category" FromRole="Category" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="Order_Details_id" />
+          </Key>
+          <Property Name="Order_Details_id" Type="Int32" Nullable="false" />
+          <Property Name="Product_id" Type="Int32" />
+          <Property Name="product_Qty" Type="Int32" />
+          <Property Name="product_price" Type="Int32" />
+          <Property Name="Order_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTotal" Type="Int32" />
+          <NavigationProperty Name="Order_tbl" Relationship="Self.FK_Order_Details_Order_tbl" FromRole="Order_Details" ToRole="Order_tbl" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Order_Details_Products" FromRole="Order_Details" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Order_tbl">
+          <Key>
+            <PropertyRef Name="Order_id" />
+          </Key>
+          <Property Name="Order_id" Type="Int32" Nullable="false" />
+          <Property Name="Order_No" Type="Int32" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Precision="3" />
+          <Property Name="Order_Total" Type="Int32" />
+          <Property Name="Register_id" Type="Int32" />
+          <Property Name="Shoping_date" Type="DateTime" Precision="3" />
+          <Property Name="Is_delivered" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Order_tbl" FromRole="Order_tbl" ToRole="Order_Details" />
+          <NavigationProperty Name="Register" Relationship="Self.FK_Order_tbl_Register" FromRole="Order_tbl" ToRole="Register" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="Category_id" Type="Int32" />
+          <Property Name="Image5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Products_Category" FromRole="Products" ToRole="Category" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Products" FromRole="Products" ToRole="Order_Details" />
+        </EntityType>
         <EntityType Name="Register">
           <Key>
             <PropertyRef Name="RegisterId" />
@@ -68,52 +277,185 @@
           <Property Name="ActivationCode" Type="Guid" Nullable="false" />
           <Property Name="ResetpasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Products" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Register" ToRole="Product" />
+          <NavigationProperty Name="Order_tbl" Relationship="Self.FK_Order_tbl_Register" FromRole="Register" ToRole="Order_tbl" />
         </EntityType>
-        <EntityContainer Name="ArchentsEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Registers" EntityType="Self.Register" />
-          <EntitySet Name="Products" EntityType="ArchentsModel.Product" />
-          <AssociationSet Name="FK__Products__userid__267ABA7A" Association="ArchentsModel.FK__Products__userid__267ABA7A">
-            <End Role="Register" EntitySet="Registers" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Product">
+        <EntityType Name="sysdiagram">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="userid" Type="Int32" />
-          <NavigationProperty Name="Register" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Product" ToRole="Register" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__Products__userid__267ABA7A">
-          <End Type="ArchentsModel.Register" Role="Register" Multiplicity="0..1" />
-          <End Type="ArchentsModel.Product" Role="Product" Multiplicity="*" />
+        <EntityType Name="Products1">
+          <Key>
+            <PropertyRef Name="Product_Id" />
+          </Key>
+          <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="pstatus" Type="Int32" />
+          <Property Name="Image5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Details_Order_tbl">
+          <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Order_tbl">
+              <PropertyRef Name="Order_id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="Order_Details_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Details_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_tbl_Register">
+          <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
+          <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Register">
               <PropertyRef Name="RegisterId" />
             </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="userid" />
+            <Dependent Role="Order_tbl">
+              <PropertyRef Name="Register_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="ArchentsEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+          <EntitySet Name="Order_tbl" EntityType="Self.Order_tbl" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Registers" EntityType="Self.Register" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Products1" EntityType="Self.Products1" />
+          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Order_tbl" Association="Self.FK_Order_Details_Order_tbl">
+            <End Role="Order_tbl" EntitySet="Order_tbl" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Products" Association="Self.FK_Order_Details_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_tbl_Register" Association="Self.FK_Order_tbl_Register">
+            <End Role="Register" EntitySet="Registers" />
+            <End Role="Order_tbl" EntitySet="Order_tbl" />
+          </AssociationSet>
+          <EntitySet Name="Reviews" EntityType="ArchentsModel.Review" />
+        </EntityContainer>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Review_Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ArchentsModelStoreContainer" CdmEntityContainer="ArchentsEntities2">
+        <EntityContainerMapping StorageEntityContainer="ArchentsModelStoreContainer" CdmEntityContainer="ArchentsEntities4">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ArchentsModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Category_Image" ColumnName="Category_Image" />
+                <ScalarProperty Name="Category_Description" ColumnName="Category_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details">
+            <EntityTypeMapping TypeName="ArchentsModel.Order_Details">
+              <MappingFragment StoreEntitySet="Order_Details">
+                <ScalarProperty Name="Order_Details_id" ColumnName="Order_Details_id" />
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="product_Qty" ColumnName="product_Qty" />
+                <ScalarProperty Name="product_price" ColumnName="product_price" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_tbl">
+            <EntityTypeMapping TypeName="ArchentsModel.Order_tbl">
+              <MappingFragment StoreEntitySet="Order_tbl">
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
+                <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order-Date" />
+                <ScalarProperty Name="Order_Total" ColumnName="Order-Total" />
+                <ScalarProperty Name="Register_id" ColumnName="Register_id" />
+                <ScalarProperty Name="Shoping_date" ColumnName="Shoping_date" />
+                <ScalarProperty Name="Is_delivered" ColumnName="Is_delivered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ArchentsModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="product_Description" ColumnName="product_Description" />
+                <ScalarProperty Name="Image1" ColumnName="Image1" />
+                <ScalarProperty Name="Image2" ColumnName="Image2" />
+                <ScalarProperty Name="Image3" ColumnName="Image3" />
+                <ScalarProperty Name="Image4" ColumnName="Image4" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Category_id" ColumnName="Category_id" />
+                <ScalarProperty Name="Image5" ColumnName="Image5" />
+                <ScalarProperty Name="Image6" ColumnName="Image6" />
+                <ScalarProperty Name="Image7" ColumnName="Image7" />
+                <ScalarProperty Name="Image8" ColumnName="Image8" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Registers">
             <EntityTypeMapping TypeName="ArchentsModel.Register">
               <MappingFragment StoreEntitySet="Register">
-                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
-                <ScalarProperty Name="ResetpasswordCode" ColumnName="ResetpasswordCode" />
                 <ScalarProperty Name="RegisterId" ColumnName="RegisterId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -121,19 +463,50 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
                 <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="ResetpasswordCode" ColumnName="ResetpasswordCode" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="ArchentsModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ArchentsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products1">
+            <EntityTypeMapping TypeName="ArchentsModel.Products1">
+              <MappingFragment StoreEntitySet="Products1">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="product_Description" ColumnName="product_Description" />
+                <ScalarProperty Name="Image1" ColumnName="Image1" />
+                <ScalarProperty Name="Image2" ColumnName="Image2" />
+                <ScalarProperty Name="Image3" ColumnName="Image3" />
+                <ScalarProperty Name="Image4" ColumnName="Image4" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="pstatus" ColumnName="pstatus" />
+                <ScalarProperty Name="Image5" ColumnName="Image5" />
+                <ScalarProperty Name="Image6" ColumnName="Image6" />
+                <ScalarProperty Name="Image7" ColumnName="Image7" />
+                <ScalarProperty Name="Image8" ColumnName="Image8" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="ArchentsModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Review_Tittle" ColumnName="Review_Tittle" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

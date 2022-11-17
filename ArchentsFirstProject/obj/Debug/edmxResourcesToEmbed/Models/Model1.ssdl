@@ -1,16 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ArchentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_Id" />
+    </Key>
+    <Property Name="Category_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Category_Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Category_Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Order_Details">
+    <Key>
+      <PropertyRef Name="Order_Details_id" />
+    </Key>
+    <Property Name="Order_Details_id" Type="int" Nullable="false" />
+    <Property Name="Product_id" Type="int" />
+    <Property Name="product_Qty" Type="int" />
+    <Property Name="product_price" Type="int" />
+    <Property Name="Order_Id" Type="nvarchar" MaxLength="50" />
+    <Property Name="SubTotal" Type="int" />
+  </EntityType>
+  <EntityType Name="Order_tbl">
+    <Key>
+      <PropertyRef Name="Order_id" />
+    </Key>
+    <Property Name="Order_id" Type="int" Nullable="false" />
+    <Property Name="Order_No" Type="int" Nullable="false" />
+    <Property Name="Order-Date" Type="datetime" />
+    <Property Name="Order-Total" Type="int" />
+    <Property Name="Register_id" Type="int" />
+    <Property Name="Shoping_date" Type="datetime" />
+    <Property Name="Is_delivered" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Products">
     <Key>
-      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="Product_Id" />
     </Key>
-    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Price" Type="money" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
-    <Property Name="Size" Type="int" Nullable="false" />
-    <Property Name="Quantity" Type="int" />
-    <Property Name="userid" Type="int" />
+    <Property Name="Product_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="product_Description" Type="nvarchar(max)" />
+    <Property Name="Image1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image4" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="Category_id" Type="int" />
+    <Property Name="Image5" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image6" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image7" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image8" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Products1">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="product_Description" Type="nvarchar(max)" />
+    <Property Name="Image1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image4" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="pstatus" Type="int" />
+    <Property Name="Image5" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image6" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image7" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image8" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Register">
     <Key>
@@ -26,23 +86,114 @@
     <Property Name="ResetpasswordCode" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone_Number" Type="varchar" MaxLength="20" />
   </EntityType>
-  <Association Name="FK__Products__userid__267ABA7A">
+  <EntityType Name="Reviews">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Review_Tittle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Body" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Order_Details_Order_tbl">
+    <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order_tbl">
+        <PropertyRef Name="Order_id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Order_Details_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_tbl_Register">
     <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
-    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Register">
         <PropertyRef Name="RegisterId" />
       </Principal>
+      <Dependent Role="Order_tbl">
+        <PropertyRef Name="Register_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_Id" />
+      </Principal>
       <Dependent Role="Products">
-        <PropertyRef Name="userid" />
+        <PropertyRef Name="Product_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ArchentsModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_tbl" EntityType="Self.Order_tbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Products__userid__267ABA7A" Association="Self.FK__Products__userid__267ABA7A">
+    <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products1" EntityType="Self.Products1" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Products1].[Product_Id] AS [Product_Id], 
+    [Products1].[Product_Name] AS [Product_Name], 
+    [Products1].[product_Description] AS [product_Description], 
+    [Products1].[Image1] AS [Image1], 
+    [Products1].[Image2] AS [Image2], 
+    [Products1].[Image3] AS [Image3], 
+    [Products1].[Image4] AS [Image4], 
+    [Products1].[Price] AS [Price], 
+    [Products1].[Stock] AS [Stock], 
+    [Products1].[pstatus] AS [pstatus], 
+    [Products1].[Image5] AS [Image5], 
+    [Products1].[Image6] AS [Image6], 
+    [Products1].[Image7] AS [Image7], 
+    [Products1].[Image8] AS [Image8]
+    FROM [dbo].[Products1] AS [Products1]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Order_Details_Order_tbl" Association="Self.FK_Order_Details_Order_tbl">
+      <End Role="Order_tbl" EntitySet="Order_tbl" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Products" Association="Self.FK_Order_Details_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_tbl_Register" Association="Self.FK_Order_tbl_Register">
       <End Role="Register" EntitySet="Register" />
+      <End Role="Order_tbl" EntitySet="Order_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+      <End Role="Category" EntitySet="Category" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
   </EntityContainer>

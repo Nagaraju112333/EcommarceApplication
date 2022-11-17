@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Antlr.Runtime;
 
 namespace ArchentsFirstProject.Controllers
 {
@@ -18,10 +19,11 @@ namespace ArchentsFirstProject.Controllers
         {
             return View();
         }
-        public ActionResult Home(int id)
+        public ActionResult Home( int s)
         {
             return View();
         }
+        
        
     }
 }

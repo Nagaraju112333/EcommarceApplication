@@ -14,14 +14,29 @@ namespace ArchentsFirstProject.Models
     
     public partial class Product
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
-        public int Size { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<int> userid { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.Order_Details = new HashSet<Order_Details>();
+        }
     
-        public virtual Register Register { get; set; }
+        public int Product_Id { get; set; }
+        public string Product_Name { get; set; }
+        public string product_Description { get; set; }
+        public string Image1 { get; set; }
+        public string Image2 { get; set; }
+        public string Image3 { get; set; }
+        public string Image4 { get; set; }
+        public Nullable<int> Price { get; set; }
+        public Nullable<int> Stock { get; set; }
+        public Nullable<int> Category_id { get; set; }
+        public string Image5 { get; set; }
+        public string Image6 { get; set; }
+        public string Image7 { get; set; }
+        public string Image8 { get; set; }
+    
+        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Details> Order_Details { get; set; }
     }
 }

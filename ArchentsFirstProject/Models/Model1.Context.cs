@@ -13,10 +13,10 @@ namespace ArchentsFirstProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ArchentsEntities2 : DbContext
+    public partial class ArchentsEntities4 : DbContext
     {
-        public ArchentsEntities2()
-            : base("name=ArchentsEntities2")
+        public ArchentsEntities4()
+            : base("name=ArchentsEntities4")
         {
         }
     
@@ -25,7 +25,13 @@ namespace ArchentsFirstProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Register> Registers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Order_Details> Order_Details { get; set; }
+        public virtual DbSet<Order_tbl> Order_tbl { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Register> Registers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Products1> Products1 { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
     }
 }

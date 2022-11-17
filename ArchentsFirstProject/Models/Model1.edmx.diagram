@@ -4,10 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="db9854c408e54b179b35b0e65b113af4" Name="Diagram1">
-        <EntityTypeShape EntityType="ArchentsModel.Register" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArchentsModel.Product" Width="1.5" PointX="3" PointY="1" />
-        <AssociationConnector Association="ArchentsModel.FK__Products__userid__267ABA7A" />
+      <Diagram DiagramId="5046ce842169449ebb707673fb182b6a" Name="Diagram1">
+        <EntityTypeShape EntityType="ArchentsModel.Category" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.Order_Details" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.Order_tbl" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.Register" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArchentsModel.Products1" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ArchentsModel.FK_Products_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchentsModel.FK_Order_Details_Order_tbl" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchentsModel.FK_Order_Details_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ArchentsModel.FK_Order_tbl_Register" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ArchentsModel.Review" Width="1.5" PointX="8.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

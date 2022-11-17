@@ -1,0 +1,13 @@
+﻿
+<ul>
+    <li>
+        @if (Session["CardCounter"] == null)
+        {
+            @Html.ActionLink(linkText: "Card", actionName: "ShopingCard", routeValues: "Shoping", htmlAttributes: new { id = "Carditgem" })
+        }
+        else
+        {
+            @Html.ActionLink(linkText: "Card("+ Session["CardCounter"]+")", actionName: "ShopingCard", routeValues: "Shoping", htmlAttributes: new { id = "Carditgem" })
+        }
+    </li>
+</ul>

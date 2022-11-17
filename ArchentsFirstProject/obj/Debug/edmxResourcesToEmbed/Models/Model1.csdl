@@ -1,5 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ArchentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_Id" />
+    </Key>
+    <Property Name="Category_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category_Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Products_Category" FromRole="Category" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order_Details">
+    <Key>
+      <PropertyRef Name="Order_Details_id" />
+    </Key>
+    <Property Name="Order_Details_id" Type="Int32" Nullable="false" />
+    <Property Name="Product_id" Type="Int32" />
+    <Property Name="product_Qty" Type="Int32" />
+    <Property Name="product_price" Type="Int32" />
+    <Property Name="Order_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SubTotal" Type="Int32" />
+    <NavigationProperty Name="Order_tbl" Relationship="Self.FK_Order_Details_Order_tbl" FromRole="Order_Details" ToRole="Order_tbl" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Order_Details_Products" FromRole="Order_Details" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order_tbl">
+    <Key>
+      <PropertyRef Name="Order_id" />
+    </Key>
+    <Property Name="Order_id" Type="Int32" Nullable="false" />
+    <Property Name="Order_No" Type="Int32" Nullable="false" />
+    <Property Name="Order_Date" Type="DateTime" Precision="3" />
+    <Property Name="Order_Total" Type="Int32" />
+    <Property Name="Register_id" Type="Int32" />
+    <Property Name="Shoping_date" Type="DateTime" Precision="3" />
+    <Property Name="Is_delivered" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Order_tbl" FromRole="Order_tbl" ToRole="Order_Details" />
+    <NavigationProperty Name="Register" Relationship="Self.FK_Order_tbl_Register" FromRole="Order_tbl" ToRole="Register" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="Category_id" Type="Int32" />
+    <Property Name="Image5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Products_Category" FromRole="Products" ToRole="Category" />
+    <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Products" FromRole="Products" ToRole="Order_Details" />
+  </EntityType>
   <EntityType Name="Register">
     <Key>
       <PropertyRef Name="RegisterId" />
@@ -13,39 +71,119 @@
     <Property Name="ActivationCode" Type="Guid" Nullable="false" />
     <Property Name="ResetpasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Products" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Register" ToRole="Product" />
+    <NavigationProperty Name="Order_tbl" Relationship="Self.FK_Order_tbl_Register" FromRole="Register" ToRole="Order_tbl" />
   </EntityType>
-  <EntityContainer Name="ArchentsEntities2" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Registers" EntityType="Self.Register" />
-    <EntitySet Name="Products" EntityType="ArchentsModel.Product" />
-    <AssociationSet Name="FK__Products__userid__267ABA7A" Association="ArchentsModel.FK__Products__userid__267ABA7A">
-      <End Role="Register" EntitySet="Registers" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Product">
+  <EntityType Name="sysdiagram">
     <Key>
-      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Size" Type="Int32" Nullable="false" />
-    <Property Name="Quantity" Type="Int32" />
-    <Property Name="userid" Type="Int32" />
-    <NavigationProperty Name="Register" Relationship="ArchentsModel.FK__Products__userid__267ABA7A" FromRole="Product" ToRole="Register" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <Association Name="FK__Products__userid__267ABA7A">
-    <End Type="ArchentsModel.Register" Role="Register" Multiplicity="0..1" />
-    <End Type="ArchentsModel.Product" Role="Product" Multiplicity="*" />
+  <EntityType Name="Products1">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="pstatus" Type="Int32" />
+    <Property Name="Image5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Products_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Order_tbl">
+    <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order_tbl">
+        <PropertyRef Name="Order_id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Order_Details_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_tbl_Register">
+    <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
+    <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Register">
         <PropertyRef Name="RegisterId" />
       </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="userid" />
+      <Dependent Role="Order_tbl">
+        <PropertyRef Name="Register_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="ArchentsEntities4" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+    <EntitySet Name="Order_tbl" EntityType="Self.Order_tbl" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Registers" EntityType="Self.Register" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Products1" EntityType="Self.Products1" />
+    <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Order_tbl" Association="Self.FK_Order_Details_Order_tbl">
+      <End Role="Order_tbl" EntitySet="Order_tbl" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Products" Association="Self.FK_Order_Details_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_tbl_Register" Association="Self.FK_Order_tbl_Register">
+      <End Role="Register" EntitySet="Registers" />
+      <End Role="Order_tbl" EntitySet="Order_tbl" />
+    </AssociationSet>
+    <EntitySet Name="Reviews" EntityType="ArchentsModel.Review" />
+  </EntityContainer>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Review_Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

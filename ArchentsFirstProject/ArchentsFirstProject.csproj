@@ -132,10 +132,16 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShopingController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeekendBootController.cs" />
     <Compile Include="Crypto.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -152,32 +158,121 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order_Details.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order_tbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Products1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Register.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ResetPassword.cs" />
+    <Compile Include="Models\Review.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopingCard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\HomeImages\1.jpg" />
+    <Content Include="Content\HomeImages\2.jpg" />
+    <Content Include="Content\HomeImages\3.jpg" />
+    <Content Include="Content\HomeImages\Dress Wallpaper.jpg" />
     <Content Include="Content\HomeImages\ecommarceImage.jpg" />
     <Content Include="Content\HomeImages\FixHomeImage.jpg" />
+    <Content Include="Content\HomeImages\greenimage.jpg" />
+    <Content Include="Content\HomeImages\greenimage2.jpg" />
+    <Content Include="Content\HomeImages\greenimage3.jpg" />
+    <Content Include="Content\HomeImages\greenimage4.jpg" />
+    <Content Include="Content\HomeImages\img_snow.jpg" />
+    <Content Include="Content\HomeImages\product-1.jpg" />
+    <Content Include="Content\HomeImages\product-2.jpg" />
+    <Content Include="Content\HomeImages\product-3.jpg" />
+    <Content Include="Content\HomeImages\product-4.jpg" />
     <Content Include="Content\HomeImages\SecondImage.jpg" />
+    <Content Include="Content\HomeImages\Sponcer.jpg" />
+    <Content Include="Content\HomeImages\Watch Wallpaper.jpg" />
+    <Content Include="Content\HomeImages\Welcome1.jpg" />
+    <Content Include="Content\Values\167040875_120086020137872_1552654185956722508_n_1280x.jpg" />
+    <Content Include="Content\Values\167040875_120086020137872_1552654185956722508_n_200x.jpg" />
+    <Content Include="Content\Values\2021_Weekend_Boot_Women_Vegan_Susaintable_Allegra_White-2.jpg" />
+    <Content Include="Content\Values\2021_Weekend_Boot_Women_Vegan_Susaintable_Beige_1280x_acef3c46-bb93-417d-b27b-59e1edbd2a8e_520x.jpg" />
+    <Content Include="Content\Values\2021_Weekend_Boot_Women_Vegan_Susaintable_Brown_Red_Laces_520x.jpg" />
+    <Content Include="Content\Values\2021_Weekend_Boot_Women_Vegan_Susaintable_Cuero_White-1.jpg" />
+    <Content Include="Content\Values\2021_Weekend_Boot_Women_Vegan_Susaintable_Cuero_White4.jpg" />
+    <Content Include="Content\Values\Banner1.jpg" />
+    <Content Include="Content\Values\banner2.jpg" />
+    <Content Include="Content\Values\danner-mountain-600-hiking-boots-review-9-694x1024.jpg" />
+    <Content Include="Content\Values\depositphotos_358816548-stock-photo-mountain-boots-beautiful-wiev-nature.jpg" />
+    <Content Include="Content\Values\FallWinter_2021_Product-1332_520x.jpg" />
+    <Content Include="Content\Values\FallWinter_2021_Product-1332_medium.jpg" />
+    <Content Include="Content\Values\Image-1-The-Weekend-Boot-Allegra-Alice_Whittles-2000x2000_1280x.jpg" />
+    <Content Include="Content\Values\Image-1-The-Weekend-Boot-Allegra-Alice_Whittles-2000x2000_200x.jpg" />
+    <Content Include="Content\Values\Image-1TheWeekendBoot-Beige-Alice_Whittles-2000x2000_1_1_2000xcopy_0ca5ba97-dd52-495d-bfdd-bfb3fa2f7ab2_520x.jpg" />
+    <Content Include="Content\Values\Image-1TheWeekendBoot-Beige-Alice_Whittles-2000x2000_1_1_2000xcopy_0ca5ba97-dd52-495d-bfdd-bfb3fa2f7ab2_medium.jpg" />
+    <Content Include="Content\Values\Image-1TheWeekendBoot-Beige-Alice_Whittles-2000x2000_1_1_28a57c1c-2208-4acd-85df-fe1990864c14.jpg" />
+    <Content Include="Content\Values\Image-1TheWeekendBoot-Beige-Alice_Whittles-2000x2000_1_1_28a57c1c-2208-4acd-85df-fe1990864c14_520x.jpg" />
+    <Content Include="Content\Values\Image-1TheWeekendBoot-Beige-Alice_Whittles-2000x2000_1_1_28a57c1c-2208-4acd-85df-fe1990864c14_medium.jpg" />
+    <Content Include="Content\Values\Image_from_iOS.jpg" />
+    <Content Include="Content\Values\img2.png" />
+    <Content Include="Content\Values\Instagram_post_-_109_aa7adaa7-7778-49d6-839a-8896aef9bea3.png" />
+    <Content Include="Content\Values\Instagram_post_-_110.png" />
+    <Content Include="Content\Values\Instagram_post_-_111.png" />
+    <Content Include="Content\Values\Instagram_post_-_112.png" />
+    <Content Include="Content\Values\laces2_ac0eede4-1ee9-4871-a882-024f07e537c5_520x.jpg" />
+    <Content Include="Content\Values\laces_3bc1187f-398e-48aa-8ec0-fb0d57ad3ca8_520x.jpg" />
+    <Content Include="Content\Values\Product1.jpg" />
+    <Content Include="Content\Values\thesus_womens_boot_vegan_sustainble_520x.jpg" />
+    <Content Include="Content\Values\ValuesBanner.png" />
+    <Content Include="Content\Values\ValuesBanner2.jpg" />
+    <Content Include="Content\Values\ValuesBanner3.jpg" />
+    <Content Include="Content\Values\ValuesBanner4.png" />
+    <Content Include="Content\Values\ValuesBanner5.png" />
+    <Content Include="Content\Values\ValuesBanner6.png" />
+    <Content Include="Content\Values\ValuesBanner7.png" />
+    <Content Include="Content\WeekendBootimages\1.jpg" />
+    <Content Include="Content\WeekendBootimages\2.jpg" />
+    <Content Include="Content\WeekendBootimages\3.jpg" />
     <Content Include="Content\WeekendBootimages\b25lY21zOmY3MjgyZGU0LWFmOTYtNDIwYy1hZGI1LWFkMjU1ZTAwZmM5Njo1MTAyMzhlOS1hZTdmLTRhOGEtODE0OC1kODkxMmYwMDRhZjA=.jpg" />
+    <Content Include="Content\WeekendBootimages\last111.jpg" />
+    <Content Include="Content\WeekendBootimages\last2.jpg" />
+    <Content Include="Content\WeekendBootimages\last222.jpg" />
+    <Content Include="Content\WeekendBootimages\last333.jpg" />
+    <Content Include="Content\WeekendBootimages\last444.jpg" />
     <Content Include="Content\WeekendBootimages\Screenshot %28122%29.png" />
     <Content Include="Content\WeekendBootimages\Secondimage.jpg" />
     <Content Include="Content\WeekendBootimages\Secondimage1.jpg" />
     <Content Include="Content\WeekendBootimages\secondimage2.jpg" />
+    <Content Include="Content\WeekendBootimages\shoee1.jpg" />
+    <Content Include="Content\WeekendBootimages\shoee2.jpg" />
+    <Content Include="Content\WeekendBootimages\shoee3.jpg" />
     <Content Include="Content\WeekendBootimages\thirdimage1.jpg" />
     <Content Include="Content\WeekendBootimages\thiredimage.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe1.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe2.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe3.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe4.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe55.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe66.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe666.jpg" />
+    <Content Include="Content\WeekendBootimages\whiteshoe7.jpg" />
+    <Content Include="Content\WeekendBootimages\Whiteshoe8.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -195,6 +290,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\WeekendBootimages\BootImage.webp" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -202,8 +298,9 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\WeekendBootimages\BootImage.webp" />
+    <Content Include="Content\WeekendBootimages\Whiteshoe6.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\HomeStyle.css" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -215,6 +312,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Product\Projectsize.js" />
+    <Content Include="Scripts\values\value.css" />
     <Content Include="Views\Shared\Master.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -231,17 +329,21 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Employee\GetEmployee.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Account\UserRegister.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Products\WeeknedBoots.cshtml" />
     <Content Include="Views\WeekendBoot\WeekendBootMainPage.cshtml" />
     <Content Include="Views\WeekendBoot\Weekenboot.cshtml" />
+    <Content Include="Views\Shared\_ShopingCard.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Values\values.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="CSS\" />
     <Folder Include="Views\Card\" />
     <Folder Include="Views\Catogery\" />
+    <Folder Include="Views\Shoping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
