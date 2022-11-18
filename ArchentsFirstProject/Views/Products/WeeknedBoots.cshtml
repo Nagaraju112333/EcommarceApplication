@@ -7,6 +7,8 @@
 
 <html onload="parent.scrollTo(0,0);">
 <head>
+    
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
@@ -21,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+   
     <style>
         *{
             margin:0;
@@ -128,6 +130,14 @@
             font-size:small;
         }
     </style>
+   @* <script type="text/javascript">
+        $(document).ready(function () {
+            function Addtocart(item) {
+                var itemId = $(item).attr("itemid");
+                alert(itemId);
+            }
+        })
+    </script>*@
 </head>
 <body>
     <div class="px-1">
@@ -139,6 +149,7 @@
             </div>
         </div>
         <div class="Main">
+            c
 
             <div class="LeftBoot">
                 <div>
@@ -170,7 +181,7 @@
                 <div>
                     <h2>Size</h2>
                 </div>
-               
+
                 <div class="Sizes">
                     @foreach (var a in ViewBag.size)
                     {
@@ -178,18 +189,18 @@
                         <label for="s-size" class="size-radio-btn">@a.size1</label>
                     }
 
-                  @*  <input type="radio" name="size" value="37" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">37</label>
-                    <input type="radio" name="size" value="38" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">38</label>
-                    <input type="radio" name="size" value="40" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">40</label>
-                    <input type="radio" name="size" value="41" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">42</label>
-                    <input type="radio" name="size" value="43" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">43</label>
-                    <input type="radio" name="size" value="44" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">44</label>*@
+                    @*  <input type="radio" name="size" value="37" hidden id="m-size" />
+                        <label for="m-size" class="size-radio-btn">37</label>
+                        <input type="radio" name="size" value="38" hidden id="m-size" />
+                        <label for="m-size" class="size-radio-btn">38</label>
+                        <input type="radio" name="size" value="40" hidden id="m-size" />
+                        <label for="m-size" class="size-radio-btn">40</label>
+                        <input type="radio" name="size" value="41" hidden id="m-size" />
+                        <label for="m-size" class="size-radio-btn">42</label>
+                        <input type="radio" name="size" value="43" hidden id="m-size" />
+                        <label for="m-size" class="size-radio-btn">43</label>
+                        <input type="radio" name="size" value="44" hidden id="m-size" />
+                        <label for="m-size" class="size-radio-btn">44</label>*@
                 </div>
                 <div style="display:flex; margin-top:30px;">
                     <div class="wrapper">
@@ -197,9 +208,10 @@
                         <span class="minus">-</span>
                         <span class="num">01</span>
                         <span class="plus">+</span>
-
                     </div>
-                    <input type="submit" value="AddtoCard" class="form-control" style="margin-left:15px; border-radius:20px; background:#123026;color:#FFFFFF" />
+
+                    <input type="submit" value="AddttoCard" id="onclick" class="form-control" style="margin-left:15px; border-radius:20px; background:#123026;color:#FFFFFF" itemid="@c.Product_Id" onclick="Addtocart(this)" />
+
                 </div>
                 <div class="" style="margin-top:20px">
                     <input type="submit" value="Buy with Shop Pay" class="form-control" style=" background: #5A31F4; color:#123026" />
@@ -253,8 +265,8 @@
                 </div>
                 <div>
                     <p style="float:left">Based on 14 reviews</p>
-                       <a href="#" style="float:right;" id="WriteAreview" scrolling="no">Write A review</a>
-                    
+                    <a href="#" style="float:right;" id="WriteAreview" scrolling="no">Write A review</a>
+
                 </div>
                 <div class="Reviews" id="reviewForm">
                     <form method="POST" action="~/Products/Review">
@@ -268,7 +280,7 @@
                         <textarea class="form-control" rows="4" cols="50" placeholder="Write Your Comments here" id="Body" name="Body"></textarea>
                         <input type="submit" />
                     </form>
-                   @* @Html.ActionLink("Submit Review", "Review", "Products", "", new { @class = "btn btn-primary" })*@
+                    @* @Html.ActionLink("Submit Review", "Review", "Products", "", new { @class = "btn btn-primary" })*@
                 </div>
                 <br />
                 <hr />
@@ -369,7 +381,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         const SizeBtn = document.querySelectorAll('.size-radio-btn');
         let checkBtn = 0;
         SizeBtn.forEach((item, i) => {
@@ -379,9 +391,6 @@
                 checkBtn = i;
             })
         })
-
-    </script>
-    <script>
         var puls = document.querySelector(".plus");
         var minus = document.querySelector('.minus');
         var num = document.querySelector('.num');
@@ -400,9 +409,6 @@
 
             }
         })
-    </script>
-    <script>
-
         var mainimage = document.getElementById("Mainimg");
         var smallimg = document.getElementsByClassName("small-image");
         smallimg[0].onclick = function () {
@@ -418,24 +424,50 @@
             mainimage.src = smallimg[3].src;
         }
 
-    </script>
-   
-  <script>
-      
-      $(document).ready(function () {
 
-          $(this).scrollTop(0);
-              
-          $('#reviewForm').hide()
-         
-      });
-  </script>
-    <script>
+
+
         $("#WriteAreview").click(function (e) {
-            @*alert("Hai")*@
+            @* alert("Hai") *@
             e.preventDefault();
             $('#reviewForm').toggle();
         })
+
+        
     </script>
+    <script>
+        $(document).ready(function () {
+
+            $(this).scrollTop(0);
+
+            $('#reviewForm').hide()
+
+        });
+    </script>
+        <script type="text/javascript">
+            function Addtocart(item) {
+                var itemId = $(item).attr("itemid")
+                alert(itemId);
+                var formdata = new FormData();
+                formdata.append("ItemId", itemId);
+                $.ajax({
+                async: true,
+                type: "Post",
+                contentType: false,
+                processData: false,
+                data: formdata,
+                    url: "/Products/ProductPost/",
+                success: function (data) {
+                    if (data.success) {
+                        $("#Carditgem").text("Card(" + data.Counter + ")");
+                    }
+
+                },
+                error: function () {
+                    alert("there is something is Wrong....")
+                }
+            }
+    </script>
+    
 </body>
 </html>

@@ -51,9 +51,8 @@ namespace ArchentsFirstProject.Controllers
         [HttpGet]
         public ActionResult Weekenboot()
         {
-
-           
             return View();
         }
+        
     }
 }
