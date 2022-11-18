@@ -41,6 +41,10 @@ namespace ArchentsFirstProject.Controllers
             var result=db.sizes.Where(x=>x.ProductId==id).ToList();
             return result;
         }
+        public ActionResult Geta()
+        {
+            return View();
+        }
      
     }
 }
