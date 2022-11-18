@@ -17,6 +17,8 @@
         <AssociationConnector Association="ArchentsModel.FK_Order_Details_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ArchentsModel.FK_Order_tbl_Register" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ArchentsModel.Review" Width="1.5" PointX="8.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ArchentsModel.size" Width="1.5" PointX="10" PointY="1.75" />
+        <AssociationConnector Association="ArchentsModel.FK__size__ProductId__5CD6CB2B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -33,5 +33,6 @@ namespace ArchentsFirstProject.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Products1> Products1 { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<size> sizes { get; set; }
     }
 }

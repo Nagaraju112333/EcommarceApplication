@@ -168,12 +168,17 @@
                     <p>12 reviews</p>
                 </div>
                 <div>
-                    <h2>Options</h2>
+                    <h2>Size</h2>
                 </div>
+               
                 <div class="Sizes">
-                    <input type="radio" name="size" value="36" checked hidden id="s-size" />
-                    <label for="s-size" class="size-radio-btn check">36</label>
-                    <input type="radio" name="size" value="37" hidden id="m-size" />
+                    @foreach (var a in ViewBag.size)
+                    {
+                        <input type="radio" name="size" value="@a.size1" hidden id="s-size" />
+                        <label for="s-size" class="size-radio-btn">@a.size1</label>
+                    }
+
+                  @*  <input type="radio" name="size" value="37" hidden id="m-size" />
                     <label for="m-size" class="size-radio-btn">37</label>
                     <input type="radio" name="size" value="38" hidden id="m-size" />
                     <label for="m-size" class="size-radio-btn">38</label>
@@ -184,7 +189,7 @@
                     <input type="radio" name="size" value="43" hidden id="m-size" />
                     <label for="m-size" class="size-radio-btn">43</label>
                     <input type="radio" name="size" value="44" hidden id="m-size" />
-                    <label for="m-size" class="size-radio-btn">44</label>
+                    <label for="m-size" class="size-radio-btn">44</label>*@
                 </div>
                 <div style="display:flex; margin-top:30px;">
                     <div class="wrapper">

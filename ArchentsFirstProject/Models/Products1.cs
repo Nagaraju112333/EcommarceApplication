@@ -14,6 +14,12 @@ namespace ArchentsFirstProject.Models
     
     public partial class Products1
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Products1()
+        {
+            this.sizes = new HashSet<size>();
+        }
+    
         public int Product_Id { get; set; }
         public string Product_Name { get; set; }
         public string product_Description { get; set; }
@@ -28,5 +34,8 @@ namespace ArchentsFirstProject.Models
         public string Image6 { get; set; }
         public string Image7 { get; set; }
         public string Image8 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<size> sizes { get; set; }
     }
 }

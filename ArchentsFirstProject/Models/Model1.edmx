@@ -56,8 +56,6 @@
           <Property Name="Image7" Type="nvarchar" MaxLength="50" />
           <Property Name="Image8" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Products1">
           <Key>
             <PropertyRef Name="Product_Id" />
@@ -101,6 +99,15 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
           <Property Name="Review_Tittle" Type="nvarchar" MaxLength="50" />
           <Property Name="Body" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="size">
+          <Key>
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="SizeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="size" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -111,6 +118,18 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK__size__ProductId__5CD6CB2B">
+          <End Role="Products1" Type="Self.Products1" Multiplicity="0..1" />
+          <End Role="size" Type="Self.size" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products1">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="size">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Details_Order_tbl">
           <End Role="Order_tbl" Type="Self.Order_tbl" Multiplicity="1" />
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
@@ -164,27 +183,15 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
           <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order_tbl" EntityType="Self.Order_tbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products1" EntityType="Self.Products1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="size" EntityType="Self.size" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Products1" EntityType="Self.Products1" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Products1].[Product_Id] AS [Product_Id], 
-    [Products1].[Product_Name] AS [Product_Name], 
-    [Products1].[product_Description] AS [product_Description], 
-    [Products1].[Image1] AS [Image1], 
-    [Products1].[Image2] AS [Image2], 
-    [Products1].[Image3] AS [Image3], 
-    [Products1].[Image4] AS [Image4], 
-    [Products1].[Price] AS [Price], 
-    [Products1].[Stock] AS [Stock], 
-    [Products1].[pstatus] AS [pstatus], 
-    [Products1].[Image5] AS [Image5], 
-    [Products1].[Image6] AS [Image6], 
-    [Products1].[Image7] AS [Image7], 
-    [Products1].[Image8] AS [Image8]
-    FROM [dbo].[Products1] AS [Products1]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK__size__ProductId__5CD6CB2B" Association="Self.FK__size__ProductId__5CD6CB2B">
+            <End Role="Products1" EntitySet="Products1" />
+            <End Role="size" EntitySet="size" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Details_Order_tbl" Association="Self.FK_Order_Details_Order_tbl">
             <End Role="Order_tbl" EntitySet="Order_tbl" />
             <End Role="Order_Details" EntitySet="Order_Details" />
@@ -307,6 +314,7 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
           <Property Name="Image6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="sizes" Relationship="ArchentsModel.FK__size__ProductId__5CD6CB2B" FromRole="Products1" ToRole="size" />
         </EntityType>
         <Association Name="FK_Products_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -381,6 +389,11 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
             <End Role="Order_tbl" EntitySet="Order_tbl" />
           </AssociationSet>
           <EntitySet Name="Reviews" EntityType="ArchentsModel.Review" />
+          <EntitySet Name="sizes" EntityType="ArchentsModel.size" />
+          <AssociationSet Name="FK__size__ProductId__5CD6CB2B" Association="ArchentsModel.FK__size__ProductId__5CD6CB2B">
+            <End Role="Products1" EntitySet="Products1" />
+            <End Role="size" EntitySet="sizes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Review">
           <Key>
@@ -392,6 +405,28 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
           <Property Name="Review_Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="size">
+          <Key>
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="size1" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Products1" Relationship="ArchentsModel.FK__size__ProductId__5CD6CB2B" FromRole="size" ToRole="Products1" />
+        </EntityType>
+        <Association Name="FK__size__ProductId__5CD6CB2B">
+          <End Type="ArchentsModel.Products1" Role="Products1" Multiplicity="0..1" />
+          <End Type="ArchentsModel.size" Role="size" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products1">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="size">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -507,6 +542,16 @@ warning 6002: The table/view 'Archents.dbo.Products1' does not have a primary ke
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sizes">
+            <EntityTypeMapping TypeName="ArchentsModel.size">
+              <MappingFragment StoreEntitySet="size">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="size1" ColumnName="size" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

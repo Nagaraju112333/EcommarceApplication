@@ -19,6 +19,7 @@ namespace ArchentsFirstProject.Controllers
         [HttpGet]
         public ActionResult WeeknedBoots(int id)
         {
+            ViewBag.size=GetSizes(id);
             ViewBag.data = db.Products1.FirstOrDefault(x => x.Product_Id == id);
             return View();
         }
@@ -34,6 +35,11 @@ namespace ArchentsFirstProject.Controllers
             db.SaveChanges();
             return RedirectToAction("WeeknedBoots");
            
+        }
+        public List<size> GetSizes(int id)
+        {
+            var result=db.sizes.Where(x=>x.ProductId==id).ToList();
+            return result;
         }
      
     }
